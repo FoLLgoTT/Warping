@@ -61,9 +61,10 @@ vec3 Bicubic(vec2 uv, vec2 InvResolution)
 			float wx = BicubicWeight(float(x) - offset.x);
 			float wy = BicubicWeight(float(y) - offset.y);
 			float w = wx * wy;
-
-			if(uv.x >= 0.0 && uv.x <= 1.0 && uv.y >= 0.0 && uv.y <= 1.0) // ignore pixels outside the picture
-				col += w * HOOKED_tex(center + vec2(x,y) * InvResolution).rgb;
+			vec2 coord = center + vec2(x, y) * InvResolution;
+			
+			if(coord.x >= 0.0 && coord.x <= 1.0 && coord.y >= 0.0 && coord.y <= 1.0) // ignore pixels outside the picture
+				col += w * HOOKED_tex(coord).rgb;
 			weight += w;
 		}
     }
