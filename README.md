@@ -3,7 +3,7 @@ Projecting an image on a curved screen with a projector introduces several geome
 
 This repository contains a GLSL/HLSL shader for MPV and MPC-HC. The shader has several variables which control the geometry distortion which is then applied with high quality bicubic filtering. Lanczos3 was also evaluated, but gave no better results than bicubic and was discarded. The shader is best applied after scaling of the player/renderer. Tests revealed the best result in this case.
 
-**Note: the GUI of both players will not be warped since it is overlayd after image processing.**
+**Note: the GUI of both players will not be warped since it is overlayed after image processing.**
 
 **Note 2: For MPV the target resolution has to be specified in the script, because there is no variable to get it from.**
 
