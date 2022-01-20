@@ -5,7 +5,7 @@ This repository contains a GLSL/HLSL shader for MPV and MPC-HC. The shader has s
 
 For MPV the target resolution has to be specified in the script, because there is no variable to get it from.
 
-##Example images
+## Example images
 The shader supports the following distortions. All type of distorions can be combined.
 
 **Symmetrical curvature in both dimensions:**
