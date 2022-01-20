@@ -12,20 +12,20 @@ This repository contains a GLSL/HLSL shader for MPV and MPC-HC. The shader has s
 The shader supports the following distortions. All type of distorions can be combined. Please see the comments behind the variables inside the shader.
 
 **Symmetrical curvature in both dimensions:**
-![Alt text](example_hor_sym.png)
+![Alt text](example_hor_sym.jpg)
 
-![Alt text](example_hor_vert_sym.png)
+![Alt text](example_hor_vert_sym.jpg)
 
 **Asymmetrical curvature:**
-![Alt text](example_hor_asym.png)
+![Alt text](example_hor_asym.jpg)
 
 **Bow distortion inside the curvature:**
-![Alt text](example_hor_bow.png)
+![Alt text](example_hor_bow.jpg)
 
 **Trapezoid:**
-![Alt text](exmple_trapezoid.png)
+![Alt text](exmple_trapezoid.jpg)
 
 **Linearity:**
-![Alt text](example_linearity1.png)
+![Alt text](example_linearity1.jpg)
 
-![Alt text](example_linearity2.png)
+![Alt text](example_linearity2.jpg)
