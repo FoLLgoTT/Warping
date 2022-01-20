@@ -26,6 +26,6 @@ The shader supports the following distortions. All type of distorions can be com
 ![Alt text](exmple_trapezoid.png)
 
 **Linearity:**
-![Alt text](example_linearity.png)
+![Alt text](example_linearity1.png)
 
 ![Alt text](example_linearity2.png)
