@@ -52,9 +52,10 @@ float3 Bicubic(float2 uv, float2 InvResolution)
 			float wx = BicubicWeight(float(x) - offset.x);
 			float wy = BicubicWeight(float(y) - offset.y);
 			float w = wx * wy;
+			float2 coord = center + float2(x, y) * InvResolution;
 			
-			if(uv.x >= 0.0 && uv.x <= 1.0 && uv.y >= 0.0 && uv.y <= 1.0) // ignore pixels outside the picture
-				col += w * tex2D(samp, center + float2(x,y) * InvResolution).rgb;
+			if(coord.x >= 0.0 && coord.x <= 1.0 && coord.y >= 0.0 && coord.y <= 1.0) // ignore pixels outside the picture
+				col += w * tex2D(samp, coord).rgb;
 			weight += w;
 		}
 	}
