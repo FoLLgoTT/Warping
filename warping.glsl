@@ -19,15 +19,6 @@ float linearityCorrectionX = 1.0;	// corrects horizontal linearity for anamorphi
 float linearityCorrectionY = 1.0;	// corrects vertical linearity for anamorphic lens
 
 
-vec3 Bilinear(vec2 uv, vec2 InvResolution)
-{
-	vec3 col = vec3(0.0);
-	if(uv.x >= 0.0 && uv.x <= 1.0 && uv.y >= 0.0 && uv.y <= 1.0) // ignore pixels outside the picture
-        col = HOOKED_tex(uv).rgb;
-  
-	return col;
-}
-
 float BicubicWeight(float d)
 {
     d = abs(d); 
