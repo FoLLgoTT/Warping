@@ -2,13 +2,13 @@ static const float distortionFactorX = 0.0; 		// higher = more curved distortion
 static const float distortionFactorY = 0.0; 		// higher = more curved distortion
 static const float distortionCenterX = 1.0; 		// 1 = symmetrical to y. 0 = only bottom. 2 = only top.
 static const float distortionCenterY = 1.0; 		// 1 = symmetrical to y. 0 = only bottom. 2 = only top.
-static const float distortionBowY = 1.0;			// 1 = none. >1 bow to bottom. <1 bow to top
+static const float distortionBowY = 1.0;		// 1 = none. >1 bow to bottom. <1 bow to top
 
-static const float trapezTop = 1.0;				// trapezoid distortion factor for the top of the picture
+static const float trapezTop = 1.0;			// trapezoid distortion factor for the top of the picture
 static const float trapezBottom = 1.0;			// trapezoid distortion factor for the bottom of the picture
 
-static const float linearityCorrectionX = 1.0;	// corrects horizontal linearity for anamorphic lens
-static const float linearityCorrectionY = 1.0;	// corrects vertical linearity for anamorphic lens
+static const float linearityCorrectionX = 1.0;		// corrects horizontal linearity for anamorphic lens
+static const float linearityCorrectionY = 1.0;		// corrects vertical linearity for anamorphic lens
 
 
 
@@ -71,8 +71,8 @@ float4 main(float2 uv : TEXCOORD0) : COLOR
 	
 	// trapezoid
 	float size = lerp(trapezTop, trapezBottom, uv.y);
-    float reciprocal = 1.0 / size;
-    uv.x = uv.x * reciprocal + (1.0 - reciprocal) / 2.0;
+    	float reciprocal = 1.0 / size;
+    	uv.x = uv.x * reciprocal + (1.0 - reciprocal) / 2.0;
 	
 	// linearity
 	if(linearityCorrectionX != 1.0)
