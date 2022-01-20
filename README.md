@@ -9,7 +9,7 @@ This repository contains a GLSL/HLSL shader for MPV and MPC-HC. The shader has s
 
 
 ## Example images
-The shader supports the following distortions. All type of distorions can be combined.
+The shader supports the following distortions. All type of distorions can be combined. Please see the comments behind the variables inside the shader.
 
 **Symmetrical curvature in both dimensions:**
 ![Alt text](example_hor_sym.png)
