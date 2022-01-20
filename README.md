@@ -1,4 +1,4 @@
-# Warping for curved screen
+# Warping for projection on a curved screen
 Projecting an image on a curved screen with a projector introduces several geometric distortions, because most lenses are engineered to be used on plane screens. These distortions can be compensated by software.
 
 This repository contains a GLSL/HLSL shader for MPV and MPC-HC. The shader has several variables which control the geometry distortion which is then applied with high quality bicubic filtering. The shader is best applied after scaling of the player/renderer. Tests revealed the best result in this case.
