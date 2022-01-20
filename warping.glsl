@@ -10,15 +10,13 @@ float distortionFactorX = 0.0; 		// higher = more curved distortion
 float distortionFactorY = 0.0; 		// higher = more curved distortion
 float distortionCenterX = 1.0; 		// 1 = symmetrical to y. 0 = only bottom. 2 = only top.
 float distortionCenterY = 1.0; 		// 1 = symmetrical to y. 0 = only bottom. 2 = only top.
-float distortionBowY = 1.0;			// 1 = none. >1 bow to bottom. <1 bow to top
+float distortionBowY = 1.0;		// 1 = none. >1 bow to bottom. <1 bow to top
 
-float trapezTop = 1.0;				// trapezoid distortion factor for the top of the picture
-float trapezBottom = 1.0;			// trapezoid distortion factor for the bottom of the picture
+float trapezTop = 1.0;			// trapezoid distortion factor for the top of the picture
+float trapezBottom = 1.0;		// trapezoid distortion factor for the bottom of the picture
 
 float linearityCorrectionX = 1.0;	// corrects horizontal linearity for anamorphic lens
 float linearityCorrectionY = 1.0;	// corrects vertical linearity for anamorphic lens
-
-int lanczosTaps = 4; 				// number of taps for Lanczos algorithm
 
 
 vec3 Bilinear(vec2 uv, vec2 InvResolution)
@@ -63,41 +61,7 @@ vec3 Bicubic(vec2 uv, vec2 InvResolution)
 			float wx = BicubicWeight(float(x) - offset.x);
 			float wy = BicubicWeight(float(y) - offset.y);
 			float w = wx * wy;
-			
-			if(uv.x >= 0.0 && uv.x <= 1.0 && uv.y >= 0.0 && uv.y <= 1.0) // ignore pixels outside the picture
-				col += w * HOOKED_tex(center + vec2(x,y) * InvResolution).rgb;
-			weight += w;
-		}
-    }
-    col /= weight;
-    
-    return col;
-}
 
-
-float Sinc(float x)
-{
-    return sin(x * 3.1415926535897932384626433) / (x * 3.1415926535897932384626433); 
-}
-float LanczosWeight(float d, float n)
-{
-    return (d == 0.0) ? (1.0) : (d * d < n * n ? Sinc(d) * Sinc(d / n) : 0.0);
-}
-vec3 Lanczos(vec2 uv, vec2 InvResolution)
-{
-    vec2 center = uv - (mod(uv / InvResolution, 1.0)-0.5) * InvResolution;// texel center
-    vec2 offset = (uv - center)/InvResolution;// relevant texel position in the range -0.5～+0.5
-    
-    vec3 col = vec3(0,0,0);
-    float weight = 0.0;
-    for(int x = -lanczosTaps; x < lanczosTaps; x++)
-	{
-		for(int y = -lanczosTaps; y < lanczosTaps; y++)
-		{        
-			float wx = LanczosWeight(float(x) - offset.x, float(lanczosTaps));
-			float wy = LanczosWeight(float(y) - offset.y, float(lanczosTaps));
-			float w = wx * wy;
-			
 			if(uv.x >= 0.0 && uv.x <= 1.0 && uv.y >= 0.0 && uv.y <= 1.0) // ignore pixels outside the picture
 				col += w * HOOKED_tex(center + vec2(x,y) * InvResolution).rgb;
 			weight += w;
@@ -122,8 +86,8 @@ vec4 hook()
 	
 	// trapezoid
 	float size = mix(trapezTop, trapezBottom, yZoomed);
-    float reciprocal = 1.0 / size;
-    uv.x = uv.x * reciprocal + (1.0 - reciprocal) / 2.0;
+    	float reciprocal = 1.0 / size;
+    	uv.x = uv.x * reciprocal + (1.0 - reciprocal) / 2.0;
 	
 	// linearity
 	if(linearityCorrectionX != 1.0)
