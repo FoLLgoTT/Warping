@@ -14,7 +14,7 @@ In MPV just put warping.glsl in a folder (e.g. "shaders")and reference it in mpv
 glsl-shaders=shaders/warping.glsl
 
 
-In MPC-HC add warping.hlsl with option "Post-resize".
+For MPC-HC put warping.hlsl in the sub folder "shaders" and add warping with option "Post-resize" in the options dialog.
 ![Alt text](mpc-hc_shader.png)
 
 
