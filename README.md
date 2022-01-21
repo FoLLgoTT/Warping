@@ -8,6 +8,16 @@ This repository contains a GLSL/HLSL shader for MPV and MPC-HC. The shader has s
 **Note 2: For MPV the target resolution has to be specified in the script, because there is no variable to get it from.**
 
 
+## Usage
+In MPV just put warping.glsl in a folder (e.g. "shaders")and reference it in mpv.conf like this:
+
+glsl-shaders=shaders/warping.glsl
+
+
+In MPC-HC add warping.hlsl with option "Post-resize".
+![Alt text](mpc-hc_shader.png)
+
+
 ## Example images
 The shader supports the following distortions. All type of distorions can be combined. Please see the comments behind the variables inside the shader.
 
