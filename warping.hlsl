@@ -89,5 +89,5 @@ float4 main(float2 uv : TEXCOORD0) : COLOR
 
 	float3 result = Bicubic(uv, 1.0 / float2(width, height));
 	
-	return float4(result, 0.0);
+	return float4(result, 1.0);
 }
