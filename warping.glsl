@@ -95,5 +95,5 @@ vec4 hook()
 	
 	vec3 result = Bicubic(uv, 1.0 / HOOKED_size);
 	
-	return vec4(result, 0.0);
+	return vec4(result, 1.0);
 }
