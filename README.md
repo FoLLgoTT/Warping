@@ -9,7 +9,7 @@ This repository contains a GLSL/HLSL shader for MPV and MPC-HC. The shader has s
 
 
 ## Usage
-In MPV just put warping.glsl in a folder (e.g. "shaders")and reference it in mpv.conf like this:
+In MPV just put warping.glsl in a folder (e.g. "shaders") and reference it in mpv.conf like this:
 
 glsl-shaders=shaders/warping.glsl
 
