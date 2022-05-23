@@ -17,6 +17,7 @@ glsl-shaders=shaders/warping.glsl
 For MPC-HC put warping.hlsl in the sub folder "shaders" and add warping with option "Post-resize" in the options dialog.
 ![Alt text](mpc-hc_shader.png)
 
+In the MPV and virtual resolution MPC-HC versions you have to define your native screen resolution.
 
 ## Example images
 The shader supports the following distortions. All type of distorions can be combined. Please see the comments behind the variables inside the shader.
