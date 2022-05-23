@@ -11,7 +11,6 @@ static const float linearityCorrectionX = 1.0;	// corrects horizontal linearity 
 static const float linearityCorrectionY = 1.0;	// corrects vertical linearity for anamorphic lens
 
 #define widthNative 	3840 // set native x resolution here
-#define heightNative 	2160 // set native y resolution here
 
 SamplerState samp : register(s0);
 
@@ -65,45 +64,34 @@ float3 Bicubic(float2 uv, float2 InvResolution)
 	return col;
 }
 
-float ConvertToVirtual(float f)
-{
-	return width / widthNative * f + (widthNative - width) / widthNative / 2;
-}
-
-float ConvertToNative(float f)
-{
-	return (f - (widthNative - width) / widthNative / 2) / width * widthNative;
-}
-
 float4 main(float2 uv : TEXCOORD0) : COLOR
 {
-	// scale to virtual resolution
-	float xVirtual = ConvertToVirtual(uv.x);
-	float yVirtual = ConvertToVirtual(uv.y);
-	
+	float zoom = width / widthNative;
+	float xZoomed = (uv.x - 0.5) * zoom + 0.5;
+	float yZoomed = (uv.y - 0.5) * zoom + 0.5;
+		
 	// perform distortion for curved screen (follows a parabola)
-	uv.x += distortionFactorX * (-2.0 * xVirtual + distortionCenterX) * yVirtual * (yVirtual - 1.0);	
-	uv.y += distortionFactorY * (-2.0 * pow(yVirtual, distortionBowY) + distortionCenterY) * xVirtual * (xVirtual - 1.0);
+	uv.x += distortionFactorX * (-2.0 * xZoomed + distortionCenterX) * yZoomed * (yZoomed - 1.0);	
+	uv.y += distortionFactorY * (-2.0 * pow(yZoomed, distortionBowY) + distortionCenterY) * xZoomed * (xZoomed - 1.0);
 	
 	// trapezoid
 	if(trapezTop != 1.0 || trapezBottom != 1.0)
 	{
-		float size = lerp(ConvertToNative(trapezTop), ConvertToNative(trapezBottom), yVirtual);
+		float size = lerp(trapezTop, trapezBottom, yZoomed);
 		float reciprocal = 1.0 / size;
-		float xTrapez = xVirtual * reciprocal + (1.0 - reciprocal) / 2.0;
-		uv.x = ConvertToNative(xTrapez);
+		uv.x = uv.x * reciprocal + (1.0 - reciprocal) / 2.0;
 	}
 	
 	// linearity
 	if(linearityCorrectionX != 1.0)
 	{
-		float x = xVirtual - 0.5;
-		uv.x = ConvertToNative(lerp(x * abs(x) * 2.000001, x, ConvertToVirtual(linearityCorrectionX)) + 0.5);
+		float x = xZoomed - 0.5;
+		uv.x = lerp(x * abs(x) * 2.000001, uv.x - 0.5, linearityCorrectionX) + 0.5;
 	}
 	if(linearityCorrectionY != 1.0)
 	{
-		float y = yVirtual - 0.5;
-		uv.y = ConvertToNative(lerp(y * abs(y) * 2.00001, y, ConvertToVirtual(linearityCorrectionY)) + 0.5);
+		float y = yZoomed - 0.5;
+		uv.y = lerp(y * abs(y) * 2.00001, uv.y - 0.5, linearityCorrectionY) + 0.5;
 	}
 
 	float3 result = Bicubic(uv, 1.0 / float2(width, height));
