@@ -1,7 +1,7 @@
 static const float widthNative = 3840; 				// set native x resolution here
 
 static const float distortionFactorX = 0.0; 		// higher = more curved distortion
-static const float distortionFactorY = 0.5; 		// higher = more curved distortion
+static const float distortionFactorY = 0.0; 		// higher = more curved distortion
 static const float distortionCenterX = 1.0; 		// 1 = symmetrical to y. 0 = only bottom. 2 = only top.
 static const float distortionCenterY = 1.0; 		// 1 = symmetrical to y. 0 = only bottom. 2 = only top.
 static const float distortionBowY = 1.0;			// 1 = none. >1 bow to bottom. <1 bow to top
