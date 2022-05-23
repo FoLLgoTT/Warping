@@ -84,7 +84,7 @@ float4 main(float2 uv : TEXCOORD0) : COLOR
 	if(linearityCorrectionY != 1.0)
 	{
 		float y = uv.y - 0.5;
-		uv.y = lerp(y * abs(y) * 2.00001, uv.y, linearityCorrectionY) + 0.5;
+		uv.y = lerp(y * abs(y) * 2.00001, y, linearityCorrectionY) + 0.5;
 	}
 
 	float3 result = Bicubic(uv, 1.0 / float2(width, height));
