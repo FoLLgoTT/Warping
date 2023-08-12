@@ -129,6 +129,20 @@ vec4 hook()
 	// perform distortion for curved screen (follows a parabola)
 	uv.x += distortionFactorX * (-2.0 * uv.x + distortionCenterX) * yZoomed * (yZoomed - 1.0);	
 	uv.y += distortionFactorY * (-2.0 * pow(uv.y, distortionBowY) + distortionCenterY) * xZoomed * (xZoomed - 1.0);
+
+	// correct size if barrel distortion is requested to avoid cutting the edges
+	if(distortionFactorX < 0)
+	{
+		float xZenithZoomed = 0.5 * zoom + 0.5;
+		float correction = 1.0 - 0.5 * distortionFactorX * (-2.0 * xZenithZoomed + distortionCenterX); // zenith of parabola
+		uv.x = (uv.x - 0.5) / correction + 0.5;
+	}
+	if(distortionFactorY < 0)
+	{
+		float yZenithZoomed = 0.5 * zoom + 0.5;
+		float correction = 1.0 - 0.5 * distortionFactorY * (-2.0 * pow(yZenithZoomed, distortionBowY) + distortionCenterY); // zenith of parabola
+		uv.y = (uv.y - 0.5) / correction + 0.5;
+	}
 	
 	// trapezoid
 	float size = mix(trapezTop, trapezBottom, yZoomed);
