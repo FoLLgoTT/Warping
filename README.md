@@ -22,7 +22,7 @@ NOTICE: You have to define your native screen resolution in the shader.
 ## Example images
 The shader supports the following distortions. All type of distorions can be combined. Please see the comments behind the variables inside the shader.
 
-**Symmetrical curvature in both dimensions:**
+**Symmetrical curvature in both dimensions (Pincushion):**
 ![Alt text](example_hor_sym.jpg)
 
 ![Alt text](example_hor_vert_sym.jpg)
@@ -32,6 +32,9 @@ The shader supports the following distortions. All type of distorions can be com
 
 **Bow distortion inside the curvature:**
 ![Alt text](example_hor_bow.jpg)
+
+**Barrel distortion:**
+![Alt text](example_barrel.jpg)
 
 **Trapezoid:**
 ![Alt text](exmple_trapezoid.jpg)
