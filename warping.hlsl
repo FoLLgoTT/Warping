@@ -1,4 +1,5 @@
 static const float widthNative = 3840; 				// set native x resolution here
+static const float heightNative = 2160; 			// set native y resolution here
 
 static const float distortionFactorX = 0.0; 		// higher = more curved distortion
 static const float distortionFactorY = 0.0; 		// higher = more curved distortion
@@ -42,9 +43,13 @@ float3 Bicubic(float2 uv, float2 InvResolution)
 {
 	float2 center = uv - (fmod(uv / InvResolution, 1.0) - 0.5) * InvResolution; // texel center
 	float2 offset = (uv - center) / InvResolution; // relevant texel position in the range -0.5～+0.5
-	
 	float3 col = float3(0,0,0);
 	float weight = 0.0;
+	float borderX1 = max((width - widthNative) / width / 2.0, 0.0);
+	float borderX2 = 1.0 - borderX1;
+	float borderY1 = max((height - heightNative) / height / 2.0, 0.0);
+	float borderY2 = 1.0 - borderY1;
+	
 	for(int x = -2; x <= 2; x++)
 	{
 		for(int y = -2; y <= 2; y++)
@@ -54,7 +59,7 @@ float3 Bicubic(float2 uv, float2 InvResolution)
 			float w = wx * wy;
 			float2 coord = center + float2(x, y) * InvResolution;
 			
-			if(coord.x >= 0.0 && coord.x <= 1.0 && coord.y >= 0.0 && coord.y <= 1.0) // ignore pixels outside the picture
+			if(coord.x >= borderX1 && coord.x <= borderX2 && coord.y >= borderY1 && coord.y <= borderY2) // ignore pixels outside the picture
 				col += w * tex2D(samp, coord).rgb;
 				
 			weight += w;
