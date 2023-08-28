@@ -12,8 +12,8 @@ float distortionCenterX = 1.0; 		// 1 = symmetrical to y. 0 = only bottom. 2 = o
 float distortionCenterY = 1.0; 		// 1 = symmetrical to y. 0 = only bottom. 2 = only top.
 float distortionBowY = 1.0;		// 1 = none. >1 bow to bottom. <1 bow to top
 
-float trapezTop = 1.0;			// trapezoid distortion factor for the top of the picture
-float trapezBottom = 1.0;		// trapezoid distortion factor for the bottom of the picture
+float trapezTop = 1.0;			// trapezoid distortion factor for the top of the picture (use values < 1.0 to avoid cutting the edges)
+float trapezBottom = 1.0;		// trapezoid distortion factor for the bottom of the picture (use values < 1.0 to avoid cutting the edges)
 
 float linearityCorrectionX = 1.0;	// corrects horizontal linearity for anamorphic lens
 float linearityCorrectionY = 1.0;	// corrects vertical linearity for anamorphic lens
